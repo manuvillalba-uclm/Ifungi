@@ -90,6 +90,7 @@ hongo(tuber_melanosporum):-
     estacion(invierno).
 link(tuber_melanosporum,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Setas-y-Hongos/#tuber-melanosporum').
 
+
 hongo(amanita_muscaria):-
      tipo(sombrero_laminas),
     (sombrero_perfil(globos);sombrero_perfil(plano_convexo)),
@@ -104,6 +105,7 @@ hongo(amanita_muscaria):-
     carne_color(blanco),
     (estacion(otoño);estacion(invierno)).
 link(amanita_muscaria,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Setas-y-Hongos/#amanita-muscaria').
+
 
 hongo(amanita_verna) :-
     tipo(sombrero_laminas),
@@ -123,6 +125,7 @@ hongo(amanita_verna) :-
     carne_color(blanco),
     (estacion(primavera);estacion(verano)).
 link(amanita_verna,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Setas-y-Hongos#amanita-verna').
+
 
 hongo(cortinarius_orellanus) :-
     tipo(sombrero_laminas),
@@ -178,8 +181,9 @@ link(boletus_satanas,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Setas-y-H
 
 hongo(gyoromitra_esculenta) :-
     tipo(sombrero),
-    (sombrero_perfil(globos);sombrero_perfil(con_pliegues)),
+    sombrero_perfil(globos),
     sombrero_ancho(2,5),
+    sombrero_perfil(con_pliegues),
     (cuticula_color(pardo);cuticula_color(rojo);cuticula_color(negro)),
     margen(enrollado),
     pie_largo(2,5),
@@ -189,92 +193,94 @@ hongo(gyoromitra_esculenta) :-
     estacion(primavera).
 link(gyoromitra_esculenta,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Setas-y-Hongos#gyromitra-esculenta').
 
-tipo(X):-menuask(tipo, X, [sombrero,sombrero_laminas,sombrero_poros,himenio,carpoforo]).
+tipo(X):-menuask(tipo, X, [sombrero,sombrero_laminas,sombrero_poros,himenio,carpoforo],nil).
 
 sombrero_ancho(X,Y):- medir(sombrero_ancho, X, Y).
 
-sombrero_perfil(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#sombrero'),
-menuask(sombrero_perfil, X, [plano_convexo,hemisferico,globos,abierto,aplanado,convexo,ovoide,con_pliegues,deprimido,embudo,extendido]).
+sombrero_perfil(X):- menuask(sombrero_perfil, X, [plano_convexo,hemisferico,globoso,abierto,aplanado,convexo,ovoide,con_pliegues,deprimido,embudo,extendido],'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#sombrero').
 
-margen(X):-www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#margen'), ask(margen, X).
+margen(X):- ask(margen, X, 'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#margen').
 multivalued(margen).
 
-cuticula(X):-  www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#cuticula'),ask(cuticula, X).
+cuticula(X):-  ask(cuticula, X,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#cuticula').
 multivalued(cuticula).
 
-cuticula_color(X):- menuask(cuticula_color, X, [amarillo,rojo,blanco,naranja,pardo,negro,verde]).
+cuticula_color(X):- menuask(cuticula_color, X, [amarillo,rojo,blanco,naranja,pardo,negro,verde],nil).
 
-laminas_forma(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#himenio'),ask(laminas_forma, X).
+laminas_forma(X):- ask(laminas_forma, X,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#himenio').
 multivalued(laminas_forma).
 
-laminas_color(X):- menuask(laminas_color, X, [blanco,rosa,amarillo,naranja,blanco,negro,marron]).
+laminas_color(X):- menuask(laminas_color, X, [blanco,rosa,amarillo,naranja,blanco,negro,marron],nil).
 
-poros(X):- ask(poros, X).
+poros(X):- ask(poros, X,nil).
 multivalued(poros).
 
-poros_color(X):- menuask(poros_color, X, [amarillo,blanco,verde,rojo]).
+poros_color(X):- menuask(poros_color, X, [amarillo,blanco,verde,rojo],nil).
 
-tubos(X):- ask(tubos, X).
+tubos(X):- ask(tubos, X,nil).
 multivalued(tubos).
 
 pie_largo(X,Y):- medir(pie_largo, X, Y).
 
-pie(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#pie'), ask(pie,X).
+pie(X):- ask(pie,X,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#pie').
 multivalued(pie).
 
-anillo(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#anillo'),ask(anillo, X).
+anillo(X):- ask(anillo, X,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#anillo').
 multivalued(anillo).
 
-anillo_color(X):- menuask(anillo_color, X, [amarillo,blanco]).
+anillo_color(X):- menuask(anillo_color, X, [amarillo,blanco],nil).
 
-volva(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#volva'),ask(volva, X).
+volva(X):- ask(volva, X,'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#volva').
 multivalued(volva).
 
-volva_color(X):- menuask(volva_color, X, [blanca]).
+volva_color(X):- menuask(volva_color, X, [blanca],nil).
 
-himenio(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#himenio'), ask(himenio, X).
+himenio(X):- ask(himenio, X, 'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#himenio').
 multivalued(himenio).
 
-carpoforo(X):-ask(carpoforo, X).
+carpoforo(X):-ask(carpoforo, X,nil).
 multivalued(carpoforo).
 
 carpoforo_diametro(X,Y):- medir(carpoforo_diametro, X, Y).
 
-peridio(X):-ask(peridio, X).
+peridio(X):-ask(peridio, X,nil).
 multivalued(peridio).
 
-peridio_color(X):- menuask(peridio_color, X, [negro,ocre]).
+peridio_color(X):- menuask(peridio_color, X, [negro,ocre],nil).
 
-gleba(X):-ask(gleba, X).
+gleba(X):-ask(gleba, X,nil).
 multivalued(gleba).
 
-gleba_color(X):- menuask(peridio_color, X, [negro]).
+gleba_color(X):- menuask(peridio_color, X, [negro],nil).
 
-carne(X):- www_open_url('https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#carne'),ask(carne, X).
+carne(X):- ask(carne, X, 'https://github.com/manuvillalba-uclm/Ifungi/wiki/Caracter%C3%ADsticas#carne').
 multivalued(carne).
 
-carne_color(X):- menuask(carne_color, X, [blanco,azul_al_corte,amarillo,naranja,rojo]).
+carne_color(X):- menuask(carne_color, X, [blanco,azul_al_corte,amarillo,naranja,rojo],nil).
 
-estacion(X):- menuask(estacion, X, [primavera,verano,otoño,invierno]).
+estacion(X):- menuask(estacion, X, [primavera,verano,otoño,invierno],nil).
 
-menuask(A, V,_):-
+
+menuask(A, V,_,_):-
     known(yes, A, V),  % succeed if true
     !.  % stop looking
-menuask(A, _,_):-
+menuask(A, _,_,_):-
     known(yes, A, _),  % fail if false
     !,   fail.
 
-menuask(A, V, MenuList) :-
+menuask(A, V, MenuList,L) :-
     write('¿Cual es el valor para: '),
     write(A),
     write('?'),
     nl,
     write(MenuList),
     nl,
+    (L\==nil -> www_open_url(L);true),
     read(X),
     check_val(X, A, V, MenuList,R),
     asserta( known(yes, A, R) ),
         R==V.
+
 
 check_val(X, _, _, MenuList,X) :-
     member(X, MenuList),
@@ -288,19 +294,21 @@ check_val(X, A, V, MenuList,R) :-
         read(Y),
     check_val(Y,A, V, MenuList,R).
 
-ask(A, V):-
+
+ask(A, V,_):-
     known(yes, A, V),  % succeed if true
     !.  % stop looking
-ask(A, V):-
+ask(A, V,_):-
     known(_, A, V),  % fail if false
     !,   fail.
-ask(A, V):-
+ask(A, V,L):-
     write(A:V),  % ask user
     write('? : '),
+    (L\==nil -> www_open_url(L)),
     read(Y),  % get the answer
     asserta(known(Y, A, V)),  % remember it
     Y == yes.  % succeed or fail
-ask(A, V):-
+ask(A, V,_):-
     not(multivalued(A)),
     known(yes, A, V2),
     V \== V2,
@@ -323,6 +331,7 @@ medir(A,X,Y):-
     asserta(known(yes,A,N)),
     (N>=X,N=<Y).
 
+
 top_goal(X):- hongo(X).
 
 solve:-
@@ -337,7 +346,7 @@ solve:-
     www_open_url(Y),
     imprimir(XLista).
 solve :-
-    write('No se ha encontrado ninguna respuesta.'),
+    write('No answer found.'),
     nl,
     listing(known(_,_,_)).
 
@@ -347,9 +356,11 @@ imprimir([X]):-
     write(X), nl,
     link(X,Y),
     www_open_url(Y).
+
 imprimir([X|XLista]):-
     write(', con: '),
     write(X), nl,
     link(X,Y),
     www_open_url(Y),
     imprimir(XLista).
+
